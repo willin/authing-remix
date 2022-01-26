@@ -1,0 +1,38 @@
+{
+  "name": "@authing/remix",
+  "version": "0.0.0",
+  "description": "Authing OIDC Authentication for Remix",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --project tsconfig.json"
+  },
+  "peerDependencies": {
+    "@remix-run/react": "^1.0.0",
+    "@remix-run/server-runtime": "^1.0.0"
+  },
+  "devDependencies": {
+    "@willin/eslint-config": "^0.0.6",
+    "eslint": "^8.7.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Authing/authing-remix.git"
+  },
+  "keywords": [
+    "authing",
+    "oidc",
+    "remix",
+    "sso"
+  ],
+  "author": "Willin Wang <willin@willin.org> (https://willin.wang/)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Authing/authing-remix/issues"
+  },
+  "homepage": "https://github.com/Authing/authing-remix#readme"
+}

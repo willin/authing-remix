@@ -1,0 +1,6 @@
+root: true
+extends:
+  - '@willin'
+rules:
+  import/no-unresolved: 0
+  '@typescript-eslint/explicit-function-return-type': 0

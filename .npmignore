@@ -1,7 +1,8 @@
-
+examples/
 demo/
 /swagger-ui*
 globalConfig.json
+.npmrc
 
 # compiled output
 node_modules/
