@@ -1,5 +1,5 @@
 
-.PHONY: clean build test install
+.PHONY: clean build test install example
 all: build
 
 clean:
@@ -12,7 +12,11 @@ install:
 	yarn install
 
 build:
-	yarn run build
+	yarn build
 
 test:
 	yarn test:cov
+
+example: build
+	rm -rf `find ./examples -name node_modules`
+	cd ./examples/basic && yarn && yarn dev

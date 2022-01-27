@@ -69,6 +69,7 @@ export function createCallbackLoader({
     });
     const oidcToken = (await res.json()) as OidcResponse;
     if (oidcToken.error) {
+      console.error(oidcToken);
       return redirect(failureRedirect ?? '/login');
     }
     const resInfo = await fetch(
