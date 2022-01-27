@@ -1,8 +1,9 @@
 import { createLogoutLoader } from '@authing/remix';
 import { sessionStorage } from '~/services/session.server';
+import { appDomain, logoutRedirectUri } from '~/config.server';
 
 export const loader = createLogoutLoader({
-  redirectUri: 'http://localhost:3000/',
-  appDomain: 'https://remix.authing.cn',
+  redirectUri: logoutRedirectUri,
+  appDomain,
   sessionStorage
 });
