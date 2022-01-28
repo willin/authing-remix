@@ -1,6 +1,14 @@
 import { redirect, type SessionStorage } from '@remix-run/server-runtime';
 import { AuthorizationError } from './error';
 
+function JSONparse<T = any>(str: string): T | null {
+  try {
+    return JSON.parse(str) as T;
+  } catch (e) {
+    return null;
+  }
+}
+
 export type IsAuthenticatedOptions = {
   failureRedirect?: string;
   successRedirect?: string;
@@ -15,7 +23,7 @@ export async function isAuthenticated<User = any>(
   const session = await sessionStorage.getSession(
     request.headers.get('Cookie')
   );
-  const user = JSON.parse(session.get('user') as string) as User;
+  const user = JSONparse<User>(session.get('user') as string);
   if (!user) {
     if (options.failureRedirect) {
       throw redirect(options.failureRedirect);
@@ -26,5 +34,5 @@ export async function isAuthenticated<User = any>(
     throw redirect(options.successRedirect);
   }
 
-  return user;
+  return user!;
 }
