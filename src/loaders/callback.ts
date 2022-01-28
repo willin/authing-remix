@@ -80,8 +80,11 @@ export function createCallbackLoader({
     const session = await sessionStorage.getSession(
       request.headers.get('Cookie')
     );
-    session.set('user', user);
+    session.set('user', JSON.stringify(user));
+    console.error('Callback User', user);
     session.set('oidc', oidcToken);
+    console.error('Callback Token', oidcToken);
+
     return redirect(successRedirect ?? '/', {
       headers: { 'Set-Cookie': await sessionStorage.commitSession(session) }
     });

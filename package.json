@@ -1,6 +1,6 @@
 {
   "name": "@authing/remix",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Authing OIDC Authentication for Remix",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

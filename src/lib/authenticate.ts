@@ -15,7 +15,7 @@ export async function isAuthenticated<User = any>(
   const session = await sessionStorage.getSession(
     request.headers.get('Cookie')
   );
-  const user = session.get('user') as User;
+  const user = JSON.parse(session.get('user') as string) as User;
   if (!user) {
     if (options.failureRedirect) {
       throw redirect(options.failureRedirect);
