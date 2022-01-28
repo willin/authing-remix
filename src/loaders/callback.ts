@@ -3,7 +3,6 @@ import {
   type LoaderFunction,
   type SessionStorage
 } from '@remix-run/server-runtime';
-import { toBinary } from '../lib/binary';
 
 export type CallbackLoaderArgs = {
   // such as: https://remix.authing.cn
@@ -81,9 +80,7 @@ export function createCallbackLoader({
     const session = await sessionStorage.getSession(
       request.headers.get('Cookie')
     );
-    console.error('Callback User', user);
-    session.set('user', toBinary(JSON.stringify(user)));
-    console.error('Callback Token', oidcToken);
+    session.set('user', user);
     session.set('oidc', oidcToken);
 
     return redirect(successRedirect ?? '/', {
