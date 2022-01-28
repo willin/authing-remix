@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/@authing/remix.svg)](https://npmjs.org/package/@authing/remix) [![npm](https://img.shields.io/npm/dt/@authing/remix.svg)](https://npmjs.org/package/@authing/remix)
 
-[中文说明]](./readme.zh.md)
+[中文说明](./readme.zh.md)
 
 Simple Authing OIDC Authentication for Remix
 
