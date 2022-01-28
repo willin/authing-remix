@@ -7,21 +7,21 @@
 Simple Authing OIDC Authentication for Remix
 
 - [@authing/remix](#authingremix)
-  - [Functions](#functions)
+  - [实用方法](#实用方法)
     - [isAuthenticated](#isauthenticated)
-  - [Loader Helpers](#loader-helpers)
+  - [Loader 辅助](#loader-辅助)
     - [createCallbackLoader](#createcallbackloader)
     - [createLoginLoader](#createloginloader)
     - [createLogoutLoader](#createlogoutloader)
-  - [Quick Start](#quick-start)
-    - [Add dependencies](#add-dependencies)
-    - [Config](#config)
-    - [Create SessionStorage](#create-sessionstorage)
-    - [Create Login, Logout, Callback](#create-login-logout-callback)
-    - [Use in router](#use-in-router)
+  - [项目示例](#项目示例)
+    - [安装依赖](#安装依赖)
+    - [配置环境变量](#配置环境变量)
+    - [创建 SessionStorage](#创建-sessionstorage)
+    - [创建登录页、注销页和回调页](#创建登录页注销页和回调页)
+    - [在路由中使用](#在路由中使用)
   - [LICENSE](#license)
 
-## Functions
+## 实用方法
 
 ### isAuthenticated
 
@@ -39,15 +39,15 @@ type IsAuthenticatedOptions = {
 };
 ```
 
-Params:
+参数说明：
 
-- `throwOnError`: throw error when not authenticated
-- `failureRedirect`: redirect when not authenticated,such as `/login`
-- `successRedirect`: redirect when authenticated, such as `/dashboard`
+- `throwOnError`： 未登录抛出错误
+- `failureRedirect`： 未登录重定向地址，如：`/login`
+- `successRedirect`： 已登录重定向地址，如：`/dashboard`
 
-Return Type: `User`
+返回值： `User`
 
-## Loader Helpers
+## Loader 辅助
 
 ### createCallbackLoader
 
@@ -71,15 +71,15 @@ type CallbackLoaderArgs = {
 };
 ```
 
-Params:
+参数说明：
 
-- `appDomain`: App Domain, like: `https://your-app.authing.cn`
-- `clientId`: App ID
-- `clientSecret`: App Secret
-- `sessionStorage`: Remix SessionStorage
-  - Notice: If you are using Remix v1.1.3 or earlier, please do not use CookieSession, it may cause UTF-8 encoding parsing error
-- `failureRedirect`: redirect when failed, such as `/error`
-- `successRedirect`: redirect when success, such as `/dashboard`
+- `appDomain`： 应用域名，如： `https://your-app.authing.cn`
+- `clientId`： App ID
+- `clientSecret`： App Secret
+- `sessionStorage`： Remix SessionStorage
+  - 注意：如果是 Remix v1.1.3 及之前版本，请不要使用 CookieSession，会存在 UTF-8 编码解析错误
+- `failureRedirect`： 登录失败重定向地址，如：`/error`
+- `successRedirect`： 成功重定向地址，如：`/dashboard`
 
 ### createLoginLoader
 
@@ -99,13 +99,13 @@ type LoginLoaderArgs = {
 };
 ```
 
-Params:
+参数说明：
 
-- `appDomain`: App Domain, like: `https://your-app.authing.cn`
-- `clientId`: App ID
-- `redirectUri`: Callback Redirect URI (same with Authing console configuration)
-- `sope`: OAuth Scope, like: `openid profile email`
-  - Ref: [Documentation](https://docs.authing.cn/v2/concepts/oidc-common-questions.html#scope-%E5%8F%82%E6%95%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF)
+- `appDomain`： 应用域名，如： `https://your-app.authing.cn`
+- `clientId`： App ID
+- `redirectUri`： 登录回调 URL （需要与 Authing 控制台中配置一致）
+- `sope`： 授权范围，如：`openid profile email`
+  - 参考： [官方文档](https://docs.authing.cn/v2/concepts/oidc-common-questions.html#scope-%E5%8F%82%E6%95%B0%E5%AF%B9%E5%BA%94%E7%9A%84%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF)
 
 ### createLogoutLoader
 
@@ -123,17 +123,17 @@ type LogoutLoaderArgs = {
 };
 ```
 
-Params:
+参数说明：
 
-- `appDomain`: App Domain, like: `https://your-app.authing.cn`
-- `redirectUri`: Logout Callback Redirect URI (same in authing console)
-- `sessionStorage`: Remix SessionStorage
+- `appDomain`： 应用域名，如： `https://your-app.authing.cn`
+- `redirectUri`： 登出回调 URL （非登录，也需要与 Authing 控制台中配置一致）
+- `sessionStorage`： Remix Session Storage，注意点同上
 
-## Quick Start
+## 项目示例
 
-Example project at `examples/basic`.
+参考 `examples/basic` 项目。
 
-### Add dependencies
+### 安装依赖
 
 ```bash
 npm install --save @authing/remix
@@ -141,9 +141,9 @@ npm install --save @authing/remix
 yarn add @authing/remix
 ```
 
-### Config
+### 配置环境变量
 
-Placed in `app/config.server.ts` or somewhere else.
+如 `app/config.server.ts`，或者其他地方。建议不要忽略该步骤，将用到的变量参数统一管理。
 
 ```ts
 export const clientId =
@@ -157,15 +157,15 @@ export const logoutRedirectUri =
   process.env.AUTHING_LOGOUT_REDIRECT_URI || 'http://localhost:3000/';
 ```
 
-### Create SessionStorage
+### 创建 SessionStorage
 
-Create `app/services/session.server.ts`.
+创建 `app/services/session.server.ts`。
 
-Notice: If you are using Remix v1.1.3 or earlier, please do not use CookieSession, it may cause UTF-8 encoding parsing error
+注意， Remix v1.1.3 （截止目前，2022 年 2 月）及之前版本请不要使用 CookieSession，会存在 UTF-8 编码解析错误。
 
-### Create Login, Logout, Callback
+### 创建登录页、注销页和回调页
 
-Create `app/routes/login.tsx`:
+创建 `app/routes/login.tsx`：
 
 ```ts
 import { createLoginLoader } from '@authing/remix';
@@ -179,7 +179,7 @@ export const loader = createLoginLoader({
 });
 ```
 
-Create `app/routes/logout.tsx`:
+创建 `app/routes/logout.tsx`：
 
 ```ts
 import { createLogoutLoader } from '@authing/remix';
@@ -193,7 +193,7 @@ export const loader = createLogoutLoader({
 });
 ```
 
-Create `app/routes/authing/callback.tsx`:
+创建 `app/routes/authing/callback.tsx`：
 
 ```ts
 import { createCallbackLoader } from '@authing/remix';
@@ -211,7 +211,7 @@ export const loader = createCallbackLoader({
 });
 ```
 
-### Use in router
+### 在路由中使用
 
 ```ts
 import { isAuthenticated } from '@authing/remix';
@@ -222,7 +222,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   return json(user || {});
 };
 
-// in page component:
+// 在页面中使用
 const user = useLoaderData();
 ```
 
