@@ -69,6 +69,7 @@ export function createCallbackLoader({
     });
     const oidcToken = (await res.json()) as OidcResponse;
     if (oidcToken.error) {
+      console.error(oidcToken);
       return redirect(failureRedirect ?? '/login');
     }
     const resInfo = await fetch(
@@ -81,6 +82,7 @@ export function createCallbackLoader({
     );
     session.set('user', user);
     session.set('oidc', oidcToken);
+
     return redirect(successRedirect ?? '/', {
       headers: { 'Set-Cookie': await sessionStorage.commitSession(session) }
     });

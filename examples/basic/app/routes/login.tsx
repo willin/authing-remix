@@ -1,8 +1,9 @@
 import { createLoginLoader } from '@authing/remix';
+import { appDomain, clientId, redirectUri } from '~/config.server';
 
 export const loader = createLoginLoader({
-  appDomain: 'https://remix.authing.cn',
-  clientId: '61dcec7e3f318cc9804acdf5',
-  redirectUri: 'http://localhost:3000/authing/callback',
-  scope: 'openid profile email roles'
+  appDomain,
+  clientId,
+  redirectUri,
+  scope: 'openid roles username phone profile'
 });

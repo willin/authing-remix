@@ -1,11 +1,14 @@
 import { createCallbackLoader } from '@authing/remix';
 import { sessionStorage } from '~/services/session.server';
+import { appDomain, clientId, clientSecret } from '~/config.server';
 
 export const loader = createCallbackLoader({
-  appDomain: 'https://remix.authing.cn',
-  clientId: '61dcec7e3f318cc9804acdf5',
-  clientSecret: '3cb6651cf2fd2d0791cacbbba17681b1',
-  failureRedirect: '/login',
-  successRedirect: '/',
+  appDomain,
+  clientId,
+  clientSecret,
+  // 登录失败返回登录页
+  failureRedirect: '/error',
+  // 跳转到 /user 接口去记录数据库用户
+  successRedirect: '/user',
   sessionStorage
 });
