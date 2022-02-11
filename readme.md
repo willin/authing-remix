@@ -93,6 +93,7 @@ function createLoginLoader({
 
 type LoginLoaderArgs = {
   appDomain: string;
+  ssoDomain?: string;
   clientId: string;
   redirectUri: string;
   scope: string;
@@ -102,6 +103,7 @@ type LoginLoaderArgs = {
 Params:
 
 - `appDomain`: App Domain, like: `https://your-app.authing.cn`
+- `ssoDomain`: SSO Domain, like: `https://your-sso.authing.cn`, when set, `appDomain` will be ignored.
 - `clientId`: App ID
 - `redirectUri`: Callback Redirect URI (same with Authing console configuration)
 - `sope`: OAuth Scope, like: `openid profile email`

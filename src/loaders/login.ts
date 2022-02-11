@@ -2,7 +2,9 @@ import { redirect, type LoaderFunction } from '@remix-run/server-runtime';
 
 export type LoginLoaderArgs = {
   // such as: https://remix.authing.cn
-  appDomain: string;
+  appDomain?: string;
+  // such as: https://remix-sso.authing.cn
+  ssoDomain?: string;
   // such as: 61dcecxxxx318xxxx04acdf5
   clientId: string;
   // such as: http://localhost:3000/authing/callback
@@ -13,6 +15,7 @@ export type LoginLoaderArgs = {
 
 export function createLoginLoader({
   appDomain,
+  ssoDomain,
   clientId,
   redirectUri,
   scope
@@ -25,7 +28,7 @@ export function createLoginLoader({
       response_type: 'code',
       nonce: `${new Date().getTime()}`
     });
-    const url = `${appDomain}/oidc/auth?${params.toString()}`;
+    const url = ssoDomain? `${ssoDomain}/login?app_id=${clientId}`: `${appDomain}/oidc/auth?${params.toString()}` ;
     return redirect(url);
   };
 }
