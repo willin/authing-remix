@@ -1,6 +1,6 @@
 {
   "name": "@authing/remix",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Authing OIDC Authentication for Remix",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -12,6 +12,8 @@
     "@remix-run/server-runtime": "^1.0.0"
   },
   "devDependencies": {
+    "@remix-run/react": "^1.6.0",
+    "@remix-run/server-runtime": "^1.6.0",
     "@willin/eslint-config": "^0.0.6",
     "eslint": "^8.7.0",
     "eslint-import-resolver-typescript": "^2.5.0",

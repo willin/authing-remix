@@ -22,9 +22,9 @@ export function createLogoutLoader({
     const url = new URL(request.url);
     if (url.search) {
       const params = new URLSearchParams({
-        redirect_uri: redirectUri
+        redirectUri: redirectUri
       });
-      return redirect(`${appDomain}/login/profile/logout?${params.toString()}`);
+      return redirect(`${appDomain}/logout?${params.toString()}`);
     }
     const session = await sessionStorage.getSession(
       request.headers.get('Cookie')
